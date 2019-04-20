@@ -38,7 +38,6 @@ app.use(Cors({
         throw new Error()
       }
     } catch (e) {
-      /** TODO: retornar o erro em JSON, utilizar um error handler global? */
       callback(new Error('Não permitido pela política CORS'))
     }
   }
@@ -102,4 +101,9 @@ app.post('/email', (request, response) => {
 /** Inicie o app */
 const server = app.listen(3001, () => {
   console.log('Listening on port ' + server.address().port + '...')
+})
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send({ 'message': err.message || 'Erro interno do servidor' })
 })
