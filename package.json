@@ -1,12 +1,16 @@
 {
   "name": "xram_memory-contact_message_relay",
   "version": "0.0.1",
-  "description": "",
+  "description": "Encaminhador de mensagens por e-mail para a página de contato do site do xraM-Memory",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/felubra/xram_memory-contact_message_relay.git"
+  },
+  "author": "Felipe Lube de Bragança <felipe.lubra@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "eslint": ">=5.0.0",
@@ -15,6 +19,9 @@
     "eslint-plugin-node": ">=7.0.0",
     "eslint-plugin-promise": ">=4.0.0",
     "eslint-plugin-standard": ">=4.0.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "dependencies": {
     "ajv": "^6.10.0",
