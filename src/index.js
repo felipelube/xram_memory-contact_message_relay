@@ -10,7 +10,11 @@ const Xss = require('xss')
 require('dotenv').config()
 
 const RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
-const SMTP_MAIL_SERVER = 'smtp.gmail.com'
+const SMTP_MAIL_SERVER = process.env.SMTP_MAIL_SERVER || 'smtp.gmail.com'
+const SECURE_EMAIL = process.env.SECURE_EMAIL && (process.env.SECURE_EMAIL === 'true' || process.env.SECURE_EMAIL === '1')
+const SMTP_MAIL_SERVER_PORT = process.env.SMTP_MAIL_SERVER_PORT && !isNaN(parseInt(process.env.SMTP_MAIL_SERVER_PORT, 10))
+  ? parseInt(process.env.SMTP_MAIL_SERVER_PORT, 10)
+  : 465
 
 /** Inicialize o Ajv e compile uma função com base no esquema da página de contato */
 const ajv = new Ajv({ schemaId: 'id' })
@@ -45,8 +49,8 @@ app.use(Cors({
 /** Crie um transporte de e-mail usando SMTP com TLS */
 const mailTransport = Nodemailer.createTransport({
   host: SMTP_MAIL_SERVER,
-  port: 465,
-  secure: true,
+  port: SMTP_MAIL_SERVER_PORT,
+  secure: SECURE_EMAIL,
   auth: {
     user: process.env.USER_ACCOUNT,
     pass: process.env.USER_PASS
