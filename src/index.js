@@ -91,7 +91,7 @@ app.post('/email', (request, response) => {
     }
     mailTransport.sendMail(mailOptions, (err) => {
       if (err) {
-        console.log(`Falha no envio de e-mail`)
+        console.log('Falha no envio de e-mail', err)
         return response.status(500).send({ 'message': 'Falha no envio de e-mails' })
       }
       return response.send({ 'message': 'Mensagem enviada' })
